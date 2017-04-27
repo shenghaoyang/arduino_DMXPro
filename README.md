@@ -13,25 +13,24 @@ Include 'arduino_DMXPro.h'
 All symbols are under the 'DMXPro' namespace 
 ##### Create a new parser (Processor)
 
-'DMXPro::Processor<typename ser_typ>::Processor(ser_typ& ser_obj,uint32_t serial,uint8_t* data,uint16_t max_channels)'
+'DMXPro::Processor\<typename ser_typ>::Processor(ser_typ& ser_obj,uint32_t serial,uint8_t* data,uint16_t max_channels)'
 
-Where 'ser_obj'      is the Serial object to attach to
-      'serial'       is the serial number to use when replying to queries 
-      'data'         is the location where received DMX data will be written to
-and   'max_channels' is the maximum number of channels of received DMX data to write (e.g. if max_channels is 13, then the DMX data value
-                     for the 14th channel will be discarded - also implies that the buffer pointed to by data must be at least
-                     max_channels large)
+Where 'ser_obj'      is the Serial object to attach to  
+      'serial'       is the serial number to use when replying to queries  
+      'data'         is the location where received DMX data will be written to  
+and   'max_channels' is the maximum number of channels of received DMX data to write (e.g. if max_channels is 13, then the DMX data value for the 14th channel will be discarded - also implies that the buffer pointed to by data must be at least max_channels large)
+
 ```C++
 //Create a new Processor attached to 'Serial' with serial number 0xdeadbeef
 #include "arduino_DMXPro.h"
 ...
 uint8_t buffer[10];
-DMXPro::Processor<decltype(Serial)> p1(Serial,0xdeadbeef,buffer,10);
+DMXPro::Processor\<decltype(Serial)> p1(Serial,0xdeadbeef,buffer,10);
 ...
 ```
 ##### Process incoming data 
 
-'bool DMXPro::Processor<typename ser_typ>::process(void)'
+'bool DMXPro::Processor\<typename ser_typ>::process(void)'
 
 ```C++
 //Parse incoming data from the serial port 
@@ -48,11 +47,11 @@ It must also be called regularly in order to avoid a serial buffer overflow.
 
 ##### Send DMX data to a host 
 
-'void DMXPro::Processor<typename ser_typ>::upload_dmx(bool valid,const uint8_t* data,uint16_t length)'
+'void DMXPro::Processor\<typename ser_typ>::upload_dmx(bool valid,const uint8_t* data,uint16_t length)'
 
-Where 'valid'  represents whether the DMX data being uploaded to the host is valid
-      'data'   points to a buffer containing the DMX data to be sent 
-and   'length' is the length of the buffer (Number of channels worth of data to send)
+Where 'valid'  represents whether the DMX data being uploaded to the host is valid  
+      'data'   points to a buffer containing the DMX data to be sent  
+and   'length' is the length of the buffer (Number of channels worth of data to send)  
 
 ```C++
 //Upload DMX data to a host
