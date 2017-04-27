@@ -5,20 +5,24 @@ DMX Pro commands.
 
 # Supported Commands 
 So far, most of the commands supported by a DMX Pro V1 device are supported, except the following: 
-1. Receive DMX on Change (Label = 9)
-2. Received DMX Change of State (Label = 9)
+1. Receive DMX on Change (Label = 9)  
+2. Received DMX Change of State (Label = 9)  
+
+
 However, some commands are specific to the DMX Pro hardware and this implementation simply ignores them:
-1. Reprogram Firmware Request (Label = 1)
-     -No action is taken
-2. Reprogram Flash Page Request (Label = 2)
-     -The flash page is received but discarded
-Partial support is provided for these commands:
-1. Get Widget Parameters Request (Label = 3) 
-     -Valid firmware version, break time data, mark after break time data, and DMX output rate data are sent back to the host
-     -But user defined configuration data is sent back to the host as all zeroes 
-2. Set Widget Parameters Request (Label = 4)
-     -New parameters are accepted, but not written to memory 
-     -User defined configuration data is not stored
+1. Reprogram Firmware Request (Label = 1)  
+     -No action is taken  
+2. Reprogram Flash Page Request (Label = 2)  
+     -The flash page is received but discarded  
+
+
+Partial support is provided for these commands:  
+1. Get Widget Parameters Request (Label = 3)   
+     -Valid firmware version, break time data, mark after break time data, and DMX output rate data are sent back to the host  
+     -But user defined configuration data is sent back to the host as all zeroes   
+2. Set Widget Parameters Request (Label = 4)  
+     -New parameters are accepted, but not written to memory   
+     -User defined configuration data is not stored  
 
 # Usage 
 Include 'arduino_DMXPro.h' 
