@@ -44,10 +44,10 @@ namespace DMXPro{
     \brief Structure representing widget parameters that are not defined arbitarily
   */
   struct widget_parameters_non_user_defined{
-    const uint16_t firmware_version=0x01; /*!< Firmware version, fixed to one */
-    uint8_t  break_time=9;                /*!< DMX break time */
-    uint8_t  mark_after_break_time=1;     /*!< DMX mark-after-break time */
-    uint8_t  dmx_output_rate=40;          /*!< DMX output rate */
+    const uint16_t firmware_version=0x0100; /*!< Firmware version, fixed to one */
+    uint8_t  break_time=9;                  /*!< DMX break time */
+    uint8_t  mark_after_break_time=1;       /*!< DMX mark-after-break time */
+    uint8_t  dmx_output_rate=40;            /*!< DMX output rate */
     static constexpr uint8_t size(){
       return (sizeof(firmware_version)+sizeof(break_time)+sizeof(mark_after_break_time)+sizeof(dmx_output_rate));
     }
