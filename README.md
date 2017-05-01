@@ -21,7 +21,7 @@ Partial support is provided for these commands:
      -Valid firmware version, break time data, mark after break time data, and DMX output rate data are sent back to the host  
      -But user defined configuration data is sent back to the host as all zeroes   
 2. Set Widget Parameters Request (Label = 4)  
-     -New parameters are accepted, but not written to memory   
+     -New parameters are accepted, but only stored in SRAM   
      -User defined configuration data is not stored  
 
 # Usage 
