@@ -44,7 +44,7 @@ namespace DMXPro{
     \brief Structure representing widget parameters that are not defined arbitarily
   */
   struct widget_parameters_non_user_defined{
-    const uint16_t firmware_version=0x0100; /*!< Firmware version, fixed to one */
+    const uint16_t firmware_version=0x0100;       /*!< Firmware version, defaulted to one */
     uint8_t  break_time=9;                  /*!< DMX break time */
     uint8_t  mark_after_break_time=1;       /*!< DMX mark-after-break time */
     uint8_t  dmx_output_rate=40;            /*!< DMX output rate */
@@ -57,6 +57,11 @@ namespace DMXPro{
       *target=break_time; ++target;
       *target=mark_after_break_time; ++target;
       *target=dmx_output_rate; ++target;
+    }
+    void read(uint8_t* source){
+      break_time=*(source++);
+      mark_after_break_time=*(source++);
+      dmx_output_rate=*(source++);
     }
   };
 
@@ -216,6 +221,21 @@ private:
       ++message_data_received;
     }
 
+    void store_widget_parameters_acq_data(){
+      if(!message_data_received){
+        if(ser->available()<5){
+
+        } else {
+          uint8_t buffer[5];
+          ser->readBytes(buffer,5);
+          parameters.read(buffer+2);
+          message_data_received+=5;
+        }
+      } else {
+        discard_data_segment();
+      }
+    }
+
     void get_widget_parameters_acq_data(){
       if(ser->available()<sizeof(widget_user_configuration_size)){
       } else {
@@ -254,7 +274,7 @@ private:
             get_widget_parameters_acq_data();
             break;
           case store_widget_parameters:
-            discard_data_segment();
+            store_widget_parameters_acq_data();
             break;
           case send_dmx_data:
             send_dmx_data_acq_data();
