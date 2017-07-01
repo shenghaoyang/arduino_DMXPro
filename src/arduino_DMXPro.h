@@ -26,6 +26,7 @@ namespace DMXPro{
     send_dmx_data=0x06, /*!< Supported, send DMX data from widget onto physical link*/
     get_widget_serial=0x0a, /*!< Supported, get serial number */
     get_widget_serial_reply=0x0a, /*!< Supported, reply with serial number */
+
     label_max, /*!< DO NOT MOVE. End marker */
     /*** All other 'labels' beyond 0x0a are unsupported. The emulator will take no action
     \todo Instead of ignoring the data bytes sent in, actually read in and process the packets, but do nothing with the data in them
@@ -41,7 +42,21 @@ namespace DMXPro{
   };
 
   /**
-    \brief Structure representing widget parameters that are not defined arbitarily
+   * \brief Return events from the serial packet processor
+   */
+  enum Event:uint8_t {
+	  none, ///< No event was generated from the packet processor\
+	   either no packets have been sent from the host PC, or we are in the \
+	    midst of processing some
+	  parameters_requested, ///< Host PC has requested DMX output information
+	  parameters_changed, ///< Host PC has requested that we change the DMX\
+	   output timings, etc.
+	  serial_requested, ///< Host PC has requested for our serial number
+	  dmx_data, ///< Host PC has updated the DMX data that we must output
+  };
+
+  /**
+    \brief Structure representing widget parameters that are not defined arbitrarily
   */
   struct widget_parameters_non_user_defined{
     const uint16_t firmware_version=0x0100;       /*!< Firmware version, defaulted to one */
@@ -82,7 +97,7 @@ private:
     uint8_t* dmx_data;                /*!< DMX buffer data location */
     uint16_t dmx_max_channels;        /*!< Maximum number of DMX channels */
     widget_parameters_non_user_defined parameters; /*!< DMX widget parameters */
-    uint16_t widget_user_configuration_size=0;     /*!< Widget user configuration size */
+    uint16_t widget_user_configuration_size=0;     /*!< Widget user configuration size (Size of the user-defined widget configuration array in the packet) */
     ser_typ* ser;                     /*!< Pointer to a serial object used to communicate with the PC */
 
     uint32_t serial_number;           /*!< Widget serial number */
@@ -302,7 +317,7 @@ private:
       ser->write(end);
     }
 
-    bool process_message(){
+    Event process_message(){
       switch(message_label){
         case invalid:
           return false;
@@ -318,17 +333,21 @@ private:
             uint8_t buffer[widget_parameters_non_user_defined::size()];
             parameters.write(buffer);
             send_data(buffer,get_widget_parameters_reply,widget_parameters_non_user_defined::size(),widget_user_configuration_size);
-            return false;
+            return Event::parameters_requested;
             break;
           }
         case store_widget_parameters:
           {
-            return false;
+        	/*
+        	 * Widget parameters would have been changed by the function
+        	 * calls
+        	 */
+            return Event::parameters_changed;
             break;
           }
         case send_dmx_data:
           {
-            return true;
+            return Event::dmx_data;
             break;
           }
         case get_widget_serial:
@@ -336,7 +355,7 @@ private:
             uint8_t buffer[sizeof(serial_number)];
             memcpy(buffer,&serial_number,sizeof(serial_number));
             send_data(buffer,get_widget_serial_reply,sizeof(serial_number),0);
-            return false;
+            return Event::serial_requested;
             break;
           }
       }
@@ -349,10 +368,24 @@ public:
       serial_number=serial;
       dmx_max_channels=max_channels;
       dmx_data=data;
+      message_data_received=0;
+      message_data_length=0;
+      message_label=labels::invalid;
       memset(dmx_data,0,dmx_max_channels);
     }
 
-    bool process(void){
+    /*!
+     * \brief Processes the incoming packet stream from the Host PC and
+     * returns events based on the processed packets.
+     * \warning This function must be called regularly in order to prevent
+     * a communications buffer overflow, which may result in lost packets.
+     * This is because this library does not handle any packet processing in
+     * the background. Any packet processing is done synchronously. Users
+     * may wish to implement asynchronous functionality themselves.
+     * @retval An event code representing what the host PC requested
+     * \sa DMXPro::Event
+     */
+    Event process(void){
 
       if(ser->available()){
 
@@ -380,7 +413,7 @@ public:
             break;
         }
       }
-      return false;
+      return Event::none;
     }
 
     /*!
@@ -391,11 +424,20 @@ public:
        dereference of an invalid pointer.
        \return DMX data value [0,255] for that particular DMX channel
     */
-
     uint8_t operator[](uint16_t c){
       return dmx_data[c-1];
     }
 
+    /*!
+     * \brief Sends dmx data to the host PC, via the provided communication
+     * channel
+     * @param valid Set to true to inform PC that dmx data is valid, and we
+     * have not dropped incoming DMX packets due to processing load. Set to false
+     * to indicate that data may be corrupted due to buffer overflow
+     * @param data Pointer to data array containing dmx data to be sent
+     * @param length Length of DMX data array (max 512)
+     * \return void
+     */
     void upload_dmx(bool valid,const uint8_t* data,uint16_t length){
       ser->write(start);
       ser->write(receive_dmx_data);
