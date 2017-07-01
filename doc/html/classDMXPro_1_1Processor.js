@@ -1,0 +1,36 @@
+var classDMXPro_1_1Processor =
+[
+    [ "States", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24", [
+      [ "none", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+      [ "type_wait", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24aa166b18047c9a32d2a648dfa1b753363", null ],
+      [ "length_wait", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24aeaa16feeea9709ce06294b39d7bb4d50", null ],
+      [ "data_wait", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24acddf62aa8552e8b51ec4d46fd1c47f04", null ],
+      [ "end_wait", "classDMXPro_1_1Processor.html#ab5c1e3e1ccd6dd60b9e05c3438341a24a49d6255a7efb5d93ffcc2f7bbb7a5180", null ]
+    ] ],
+    [ "Processor", "classDMXPro_1_1Processor.html#a1fc149f6c2f24a8fb8e2562c253e0ddf", null ],
+    [ "discard_data_segment", "classDMXPro_1_1Processor.html#a21649894efa9a8e88148b5832b15e4b0", null ],
+    [ "get_widget_parameters_acq_data", "classDMXPro_1_1Processor.html#aa2e16c41e09b7823570132f02d57ba34", null ],
+    [ "obtain_data_bytes", "classDMXPro_1_1Processor.html#a1170e4aae92ed4bf740020e13602e648", null ],
+    [ "obtain_end_byte", "classDMXPro_1_1Processor.html#ad8895162387072e0c5c44101f516b351", null ],
+    [ "obtain_length_bytes", "classDMXPro_1_1Processor.html#a229f4d96176b4fbcda52fa09e44e297a", null ],
+    [ "obtain_start_byte", "classDMXPro_1_1Processor.html#a792bcffc8ca31367baf568305516dac8", null ],
+    [ "obtain_type_byte", "classDMXPro_1_1Processor.html#ad2e73b51c77d95ff948b2b994eba3cfd", null ],
+    [ "operator[]", "classDMXPro_1_1Processor.html#a93e71e87740b0464504f829297bb654f", null ],
+    [ "process", "classDMXPro_1_1Processor.html#a3391d1ac0d213bdadbed8313d15584d6", null ],
+    [ "process_message", "classDMXPro_1_1Processor.html#a21c28c13ee050cabdaabc6d869137dcc", null ],
+    [ "send_data", "classDMXPro_1_1Processor.html#a554484560a2dcc0d5763074a584074bb", null ],
+    [ "send_dmx_data_acq_data", "classDMXPro_1_1Processor.html#a27f23f48cc4fe881915e813a972eb43b", null ],
+    [ "set_channel", "classDMXPro_1_1Processor.html#a3632542df4aae7719d6ab2e964271e36", null ],
+    [ "store_widget_parameters_acq_data", "classDMXPro_1_1Processor.html#a30fe8b5251a30f8662dbb6d312c4fe25", null ],
+    [ "upload_dmx", "classDMXPro_1_1Processor.html#ae65b0e05885eb2878544e5bedcded36c", null ],
+    [ "dmx_data", "classDMXPro_1_1Processor.html#a0dc6a66e64a393c6ca41f0d596edca3b", null ],
+    [ "dmx_max_channels", "classDMXPro_1_1Processor.html#a1286b3edd8b9eea1c27853ac48c3845f", null ],
+    [ "message_data_length", "classDMXPro_1_1Processor.html#a240aa5037cd16241045aa59cf7778924", null ],
+    [ "message_data_received", "classDMXPro_1_1Processor.html#a1ac91fd49f9650bc45ee1a1ad8e5f39f", null ],
+    [ "message_label", "classDMXPro_1_1Processor.html#a7cda5025516aa2cdf2fdab4928652678", null ],
+    [ "parameters", "classDMXPro_1_1Processor.html#ab862c9d44d1abdcd029d0d47da7e928d", null ],
+    [ "ser", "classDMXPro_1_1Processor.html#afad2bc7129dfc3e1f039af5ae0243802", null ],
+    [ "serial_number", "classDMXPro_1_1Processor.html#ab3573fe1aa615ec51dfd826c7f2747f9", null ],
+    [ "state", "classDMXPro_1_1Processor.html#a1b0ea97d2f76042a9c5c65d6fbb88df0", null ],
+    [ "widget_user_configuration_size", "classDMXPro_1_1Processor.html#a45fb005d1d5aa98896a8a29362f5a7e8", null ]
+];

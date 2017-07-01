@@ -1,0 +1,157 @@
+\hypertarget{namespaceDMXPro}{}\section{D\+M\+X\+Pro Namespace Reference}
+\label{namespaceDMXPro}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classDMXPro_1_1Processor}{Processor}
+\item 
+struct \hyperlink{structDMXPro_1_1widget__parameters__non__user__defined}{widget\+\_\+parameters\+\_\+non\+\_\+user\+\_\+defined}
+\begin{DoxyCompactList}\small\item\em Structure representing widget parameters that are not defined arbitrarily. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{labels} \+: uint8\+\_\+t \{ \newline
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda55c46da95be45298c843d4024bd2fee3}{invalid} =0x00, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda993f6bf5a5f703a2bb716f14edc559dd}{reprogram\+\_\+firmware} =0x01, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaad9428e105ffc4a4fc6e8f5c1d239f74}{program\+\_\+flash\+\_\+page} =0x02, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaf8caa547d397a97108ca47709f9df577}{program\+\_\+flash\+\_\+page\+\_\+reply} =0x02, 
+\newline
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaeecca4860dc9ba78e33678f4114d4c3c}{get\+\_\+widget\+\_\+parameters} =0x03, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cdadd2ab9d52b7d9b79893f674ab9c51094}{get\+\_\+widget\+\_\+parameters\+\_\+reply} =0x03, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cdad29a1d2d4bf0ef748da9ee9be9c6dbac}{store\+\_\+widget\+\_\+parameters} =0x04, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda0286e9771de253666cef100914519d76}{receive\+\_\+dmx\+\_\+data} =0x05, 
+\newline
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda9b6d6b2db8164ed8608dd614951d381d}{send\+\_\+dmx\+\_\+data} =0x06, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda484d7b8788d281d1107e5a24214a8d97}{get\+\_\+widget\+\_\+serial} =0x0a, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda2f020af04645c0ec2e64ab77adf46467}{get\+\_\+widget\+\_\+serial\+\_\+reply} =0x0a, 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cda1f1f0f638168f4d91a5b90cd9474927e}{label\+\_\+max}
+ \}\begin{DoxyCompactList}\small\item\em Lists of all message types supported by a D\+MX Pro Widget (Firmware Version 1) \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6}{delimiters} \+: uint8\+\_\+t \{ \hyperlink{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6ab31985c0a68286d045c874a0d91d300f}{start} =0x7e, 
+\hyperlink{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6a0011ec6afa29407d423b9ad17a00c6dd}{end} =0xe7
+ \}\begin{DoxyCompactList}\small\item\em Message delimiters and their values. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{Event} \+: uint8\+\_\+t \{ \newline
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6daa4efa255fbd673aa733c90fd0e2c2ca7}{none}, 
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da94e16da01d36dcedc1f2fdacdeba2399}{parameters\+\_\+requested}, 
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da013201c7d4dde91ca5c8ce7a2b60e71d}{parameters\+\_\+changed}, 
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da2135a293c38559b59c95f8e31c96b2b1}{serial\+\_\+requested}, 
+\newline
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6dad38fe8af23604d427d36da681d413dda}{dmx\+\_\+data}
+ \}\begin{DoxyCompactList}\small\item\em Return events from the serial packet processor. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6}\label{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6}} 
+\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!delimiters@{delimiters}}
+\index{delimiters@{delimiters}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}
+\subsubsection{\texorpdfstring{delimiters}{delimiters}}
+{\footnotesize\ttfamily enum \hyperlink{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6}{D\+M\+X\+Pro\+::delimiters} \+: uint8\+\_\+t}
+
+
+
+Message delimiters and their values. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{start@{start}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!start@{start}}}\mbox{\Hypertarget{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6ab31985c0a68286d045c874a0d91d300f}\label{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6ab31985c0a68286d045c874a0d91d300f}} 
+start&Message start delimiter \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{end@{end}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!end@{end}}}\mbox{\Hypertarget{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6a0011ec6afa29407d423b9ad17a00c6dd}\label{namespaceDMXPro_ae978412ae5d98682f1a8f876434749d6a0011ec6afa29407d423b9ad17a00c6dd}} 
+end&Message end delimiter \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}} 
+\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!Event@{Event}}
+\index{Event@{Event}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}
+\subsubsection{\texorpdfstring{Event}{Event}}
+{\footnotesize\ttfamily enum \hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{D\+M\+X\+Pro\+::\+Event} \+: uint8\+\_\+t}
+
+
+
+Return events from the serial packet processor. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{none@{none}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!none@{none}}}\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6daa4efa255fbd673aa733c90fd0e2c2ca7}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6daa4efa255fbd673aa733c90fd0e2c2ca7}} 
+none&No event was generated from the packet processor either no packets have been sent from the host PC, or we are in the midst of processing some. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{parameters\+\_\+requested@{parameters\+\_\+requested}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!parameters\+\_\+requested@{parameters\+\_\+requested}}}\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da94e16da01d36dcedc1f2fdacdeba2399}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da94e16da01d36dcedc1f2fdacdeba2399}} 
+parameters\+\_\+requested&Host PC has requested D\+MX output information. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{parameters\+\_\+changed@{parameters\+\_\+changed}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!parameters\+\_\+changed@{parameters\+\_\+changed}}}\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da013201c7d4dde91ca5c8ce7a2b60e71d}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da013201c7d4dde91ca5c8ce7a2b60e71d}} 
+parameters\+\_\+changed&Host PC has requested that we change the D\+MX output timings, etc. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{serial\+\_\+requested@{serial\+\_\+requested}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!serial\+\_\+requested@{serial\+\_\+requested}}}\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da2135a293c38559b59c95f8e31c96b2b1}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6da2135a293c38559b59c95f8e31c96b2b1}} 
+serial\+\_\+requested&Host PC has requested for our serial number. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dmx\+\_\+data@{dmx\+\_\+data}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!dmx\+\_\+data@{dmx\+\_\+data}}}\mbox{\Hypertarget{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6dad38fe8af23604d427d36da681d413dda}\label{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6dad38fe8af23604d427d36da681d413dda}} 
+dmx\+\_\+data&Host PC has updated the D\+MX data that we must output. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}} 
+\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!labels@{labels}}
+\index{labels@{labels}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}
+\subsubsection{\texorpdfstring{labels}{labels}}
+{\footnotesize\ttfamily enum \hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{D\+M\+X\+Pro\+::labels} \+: uint8\+\_\+t}
+
+
+
+Lists of all message types supported by a D\+MX Pro Widget (Firmware Version 1) 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{invalid@{invalid}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!invalid@{invalid}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda55c46da95be45298c843d4024bd2fee3}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda55c46da95be45298c843d4024bd2fee3}} 
+invalid&invalid Used to represent a data packet with an invalid label -\/i.\+e. a D\+MX Pro v1 Shouldn\textquotesingle{}t support this command \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{reprogram\+\_\+firmware@{reprogram\+\_\+firmware}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!reprogram\+\_\+firmware@{reprogram\+\_\+firmware}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda993f6bf5a5f703a2bb716f14edc559dd}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda993f6bf5a5f703a2bb716f14edc559dd}} 
+reprogram\+\_\+firmware&reprogram\+\_\+firmware Unsupported, reprogram firmware -\/ but we can\textquotesingle{}t really reprogram P\+R\+O\+G\+M\+EM on the fly \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{program\+\_\+flash\+\_\+page@{program\+\_\+flash\+\_\+page}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!program\+\_\+flash\+\_\+page@{program\+\_\+flash\+\_\+page}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaad9428e105ffc4a4fc6e8f5c1d239f74}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaad9428e105ffc4a4fc6e8f5c1d239f74}} 
+program\+\_\+flash\+\_\+page&program\+\_\+flash\+\_\+page Unsupported, programs pages of device\textquotesingle{}s flash -\/ can\textquotesingle{}t really do that on the Arduino easily \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{program\+\_\+flash\+\_\+page\+\_\+reply@{program\+\_\+flash\+\_\+page\+\_\+reply}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!program\+\_\+flash\+\_\+page\+\_\+reply@{program\+\_\+flash\+\_\+page\+\_\+reply}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaf8caa547d397a97108ca47709f9df577}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaf8caa547d397a97108ca47709f9df577}} 
+program\+\_\+flash\+\_\+page\+\_\+reply&program\+\_\+flash\+\_\+page\+\_\+reply Unsupported, no programming of flash pages is supported by this library \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{get\+\_\+widget\+\_\+parameters@{get\+\_\+widget\+\_\+parameters}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!get\+\_\+widget\+\_\+parameters@{get\+\_\+widget\+\_\+parameters}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaeecca4860dc9ba78e33678f4114d4c3c}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cdaeecca4860dc9ba78e33678f4114d4c3c}} 
+get\+\_\+widget\+\_\+parameters&get\+\_\+widget\+\_\+parameters Supported, but no programming of parameters is supported \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{get\+\_\+widget\+\_\+parameters\+\_\+reply@{get\+\_\+widget\+\_\+parameters\+\_\+reply}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!get\+\_\+widget\+\_\+parameters\+\_\+reply@{get\+\_\+widget\+\_\+parameters\+\_\+reply}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cdadd2ab9d52b7d9b79893f674ab9c51094}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cdadd2ab9d52b7d9b79893f674ab9c51094}} 
+get\+\_\+widget\+\_\+parameters\+\_\+reply&get\+\_\+widget\+\_\+parameters\+\_\+reply Supported, but no storing of parameters is supported \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{store\+\_\+widget\+\_\+parameters@{store\+\_\+widget\+\_\+parameters}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!store\+\_\+widget\+\_\+parameters@{store\+\_\+widget\+\_\+parameters}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cdad29a1d2d4bf0ef748da9ee9be9c6dbac}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cdad29a1d2d4bf0ef748da9ee9be9c6dbac}} 
+store\+\_\+widget\+\_\+parameters&store\+\_\+widget\+\_\+parameters Unsupported, no storing of parameters is supported \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{receive\+\_\+dmx\+\_\+data@{receive\+\_\+dmx\+\_\+data}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!receive\+\_\+dmx\+\_\+data@{receive\+\_\+dmx\+\_\+data}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda0286e9771de253666cef100914519d76}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda0286e9771de253666cef100914519d76}} 
+receive\+\_\+dmx\+\_\+data&receive\+\_\+dmx\+\_\+data Supported, send D\+MX data to PC from widget \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{send\+\_\+dmx\+\_\+data@{send\+\_\+dmx\+\_\+data}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!send\+\_\+dmx\+\_\+data@{send\+\_\+dmx\+\_\+data}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda9b6d6b2db8164ed8608dd614951d381d}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda9b6d6b2db8164ed8608dd614951d381d}} 
+send\+\_\+dmx\+\_\+data&send\+\_\+dmx\+\_\+data Supported, send D\+MX data from widget onto physical link \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{get\+\_\+widget\+\_\+serial@{get\+\_\+widget\+\_\+serial}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!get\+\_\+widget\+\_\+serial@{get\+\_\+widget\+\_\+serial}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda484d7b8788d281d1107e5a24214a8d97}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda484d7b8788d281d1107e5a24214a8d97}} 
+get\+\_\+widget\+\_\+serial&get\+\_\+widget\+\_\+serial Supported, get serial number \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{get\+\_\+widget\+\_\+serial\+\_\+reply@{get\+\_\+widget\+\_\+serial\+\_\+reply}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!get\+\_\+widget\+\_\+serial\+\_\+reply@{get\+\_\+widget\+\_\+serial\+\_\+reply}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda2f020af04645c0ec2e64ab77adf46467}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda2f020af04645c0ec2e64ab77adf46467}} 
+get\+\_\+widget\+\_\+serial\+\_\+reply&get\+\_\+widget\+\_\+serial\+\_\+reply Supported, reply with serial number \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{label\+\_\+max@{label\+\_\+max}!D\+M\+X\+Pro@{D\+M\+X\+Pro}}\index{D\+M\+X\+Pro@{D\+M\+X\+Pro}!label\+\_\+max@{label\+\_\+max}}}\mbox{\Hypertarget{namespaceDMXPro_a001319de95203723f1bd253fec3186cda1f1f0f638168f4d91a5b90cd9474927e}\label{namespaceDMXPro_a001319de95203723f1bd253fec3186cda1f1f0f638168f4d91a5b90cd9474927e}} 
+label\+\_\+max&label\+\_\+max DO N\+OT M\+O\+VE. End marker \\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,469 @@
+\hypertarget{classDMXPro_1_1Processor}{}\section{D\+M\+X\+Pro\+:\+:Processor$<$ ser\+\_\+typ $>$ Class Template Reference}
+\label{classDMXPro_1_1Processor}\index{D\+M\+X\+Pro\+::\+Processor$<$ ser\+\_\+typ $>$@{D\+M\+X\+Pro\+::\+Processor$<$ ser\+\_\+typ $>$}}
+
+
+{\ttfamily \#include $<$arduino\+\_\+\+D\+M\+X\+Pro.\+h$>$}
+
+
+
+Collaboration diagram for D\+M\+X\+Pro\+:\+:Processor$<$ ser\+\_\+typ $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classDMXPro_1_1Processor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMXPro_1_1Processor_a1fc149f6c2f24a8fb8e2562c253e0ddf}{Processor} (ser\+\_\+typ \&ser\+\_\+obj, uint32\+\_\+t serial, uint8\+\_\+t $\ast$data, uint16\+\_\+t max\+\_\+channels)
+\item 
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{Event} \hyperlink{classDMXPro_1_1Processor_a3391d1ac0d213bdadbed8313d15584d6}{process} (void)
+\begin{DoxyCompactList}\small\item\em Processes the incoming packet stream from the Host PC and returns events based on the processed packets. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classDMXPro_1_1Processor_a93e71e87740b0464504f829297bb654f}{operator\mbox{[}$\,$\mbox{]}} (uint16\+\_\+t c)
+\begin{DoxyCompactList}\small\item\em Obtains the D\+MX data value for a particular D\+MX channel. \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_ae65b0e05885eb2878544e5bedcded36c}{upload\+\_\+dmx} (bool valid, const uint8\+\_\+t $\ast$data, uint16\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Sends dmx data to the host PC, via the provided communication channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}{States} \{ \newline
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8}{States\+::none}, 
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aa166b18047c9a32d2a648dfa1b753363}{States\+::type\+\_\+wait}, 
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aeaa16feeea9709ce06294b39d7bb4d50}{States\+::length\+\_\+wait}, 
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24acddf62aa8552e8b51ec4d46fd1c47f04}{States\+::data\+\_\+wait}, 
+\newline
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a49d6255a7efb5d93ffcc2f7bbb7a5180}{States\+::end\+\_\+wait}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDMXPro_1_1Processor_a3632542df4aae7719d6ab2e964271e36}{set\+\_\+channel} (uint16\+\_\+t channel\+\_\+number, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Sets a D\+MX channel to a certain value. \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_a792bcffc8ca31367baf568305516dac8}{obtain\+\_\+start\+\_\+byte} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Checks that the next incoming byte is indeed the start byte. \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_ad2e73b51c77d95ff948b2b994eba3cfd}{obtain\+\_\+type\+\_\+byte} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Stores the next incoming value as the type byte. \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_a229f4d96176b4fbcda52fa09e44e297a}{obtain\+\_\+length\+\_\+bytes} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Reads in the next two length bytes, and checks that the resulting length value derived from those two bytes is valid. \end{DoxyCompactList}\item 
+bool \hyperlink{classDMXPro_1_1Processor_ad8895162387072e0c5c44101f516b351}{obtain\+\_\+end\+\_\+byte} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Checks that the next incoming byte is indeed the end delimiter byte. \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_a21649894efa9a8e88148b5832b15e4b0}{discard\+\_\+data\+\_\+segment} ()
+\begin{DoxyCompactList}\small\item\em One of the actions taken when the state machine is tasked to obtain the payload data. This function represents the action to discard the payload data. (Run for message types that are not supported, or not implemented, where the data does not concern us) \end{DoxyCompactList}\item 
+void \hyperlink{classDMXPro_1_1Processor_a30fe8b5251a30f8662dbb6d312c4fe25}{store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data} ()
+\item 
+void \hyperlink{classDMXPro_1_1Processor_aa2e16c41e09b7823570132f02d57ba34}{get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data} ()
+\item 
+void \hyperlink{classDMXPro_1_1Processor_a27f23f48cc4fe881915e813a972eb43b}{send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data} ()
+\item 
+void \hyperlink{classDMXPro_1_1Processor_a1170e4aae92ed4bf740020e13602e648}{obtain\+\_\+data\+\_\+bytes} ()
+\item 
+void \hyperlink{classDMXPro_1_1Processor_a554484560a2dcc0d5763074a584074bb}{send\+\_\+data} (uint8\+\_\+t $\ast$data, \hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{labels} label, uint16\+\_\+t data\+\_\+size, uint16\+\_\+t append\+\_\+zeroes)
+\item 
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{Event} \hyperlink{classDMXPro_1_1Processor_a21c28c13ee050cabdaabc6d869137dcc}{process\+\_\+message} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}{States} \hyperlink{classDMXPro_1_1Processor_a1b0ea97d2f76042a9c5c65d6fbb88df0}{state} =\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8}{States\+::none}
+\item 
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{labels} \hyperlink{classDMXPro_1_1Processor_a7cda5025516aa2cdf2fdab4928652678}{message\+\_\+label}
+\item 
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor_a240aa5037cd16241045aa59cf7778924}{message\+\_\+data\+\_\+length}
+\item 
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor_a1ac91fd49f9650bc45ee1a1ad8e5f39f}{message\+\_\+data\+\_\+received}
+\item 
+uint8\+\_\+t $\ast$ \hyperlink{classDMXPro_1_1Processor_a0dc6a66e64a393c6ca41f0d596edca3b}{dmx\+\_\+data}
+\item 
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor_a1286b3edd8b9eea1c27853ac48c3845f}{dmx\+\_\+max\+\_\+channels}
+\item 
+\hyperlink{structDMXPro_1_1widget__parameters__non__user__defined}{widget\+\_\+parameters\+\_\+non\+\_\+user\+\_\+defined} \hyperlink{classDMXPro_1_1Processor_ab862c9d44d1abdcd029d0d47da7e928d}{parameters}
+\item 
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor_a45fb005d1d5aa98896a8a29362f5a7e8}{widget\+\_\+user\+\_\+configuration\+\_\+size} =0
+\item 
+ser\+\_\+typ $\ast$ \hyperlink{classDMXPro_1_1Processor_afad2bc7129dfc3e1f039af5ae0243802}{ser}
+\item 
+uint32\+\_\+t \hyperlink{classDMXPro_1_1Processor_ab3573fe1aa615ec51dfd826c7f2747f9}{serial\+\_\+number}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!States@{States}}
+\index{States@{States}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{States}{States}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+enum \hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}{D\+M\+X\+Pro\+::\+Processor\+::\+States}\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [private]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{none@{none}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!none@{none}}}\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8}} 
+none&No message being processed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{type\+\_\+wait@{type\+\_\+wait}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!type\+\_\+wait@{type\+\_\+wait}}}\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aa166b18047c9a32d2a648dfa1b753363}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aa166b18047c9a32d2a648dfa1b753363}} 
+type\+\_\+wait&Waiting for message type \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{length\+\_\+wait@{length\+\_\+wait}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!length\+\_\+wait@{length\+\_\+wait}}}\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aeaa16feeea9709ce06294b39d7bb4d50}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24aeaa16feeea9709ce06294b39d7bb4d50}} 
+length\+\_\+wait&Waiting for length \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{data\+\_\+wait@{data\+\_\+wait}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!data\+\_\+wait@{data\+\_\+wait}}}\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24acddf62aa8552e8b51ec4d46fd1c47f04}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24acddf62aa8552e8b51ec4d46fd1c47f04}} 
+data\+\_\+wait&Waiting for data \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{end\+\_\+wait@{end\+\_\+wait}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!end\+\_\+wait@{end\+\_\+wait}}}\mbox{\Hypertarget{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a49d6255a7efb5d93ffcc2f7bbb7a5180}\label{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a49d6255a7efb5d93ffcc2f7bbb7a5180}} 
+end\+\_\+wait&Waiting for message end \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a1fc149f6c2f24a8fb8e2562c253e0ddf}\label{classDMXPro_1_1Processor_a1fc149f6c2f24a8fb8e2562c253e0ddf}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!Processor@{Processor}}
+\index{Processor@{Processor}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{Processor()}{Processor()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::\hyperlink{classDMXPro_1_1Processor}{Processor} (\begin{DoxyParamCaption}\item[{ser\+\_\+typ \&}]{ser\+\_\+obj,  }\item[{uint32\+\_\+t}]{serial,  }\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{uint16\+\_\+t}]{max\+\_\+channels }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a21649894efa9a8e88148b5832b15e4b0}\label{classDMXPro_1_1Processor_a21649894efa9a8e88148b5832b15e4b0}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!discard\+\_\+data\+\_\+segment@{discard\+\_\+data\+\_\+segment}}
+\index{discard\+\_\+data\+\_\+segment@{discard\+\_\+data\+\_\+segment}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{discard\+\_\+data\+\_\+segment()}{discard\_data\_segment()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::discard\+\_\+data\+\_\+segment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+One of the actions taken when the state machine is tasked to obtain the payload data. This function represents the action to discard the payload data. (Run for message types that are not supported, or not implemented, where the data does not concern us) 
+
+One byte of serial data is read in, and subsequently discarded.
+
+\begin{DoxyNote}{Note}
+Increments the message\+\_\+data\+\_\+received variable.
+\end{DoxyNote}
+Alters one variable of non-\/local scope \mbox{\Hypertarget{classDMXPro_1_1Processor_aa2e16c41e09b7823570132f02d57ba34}\label{classDMXPro_1_1Processor_aa2e16c41e09b7823570132f02d57ba34}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data@{get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data}}
+\index{get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data@{get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data()}{get\_widget\_parameters\_acq\_data()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::get\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a1170e4aae92ed4bf740020e13602e648}\label{classDMXPro_1_1Processor_a1170e4aae92ed4bf740020e13602e648}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!obtain\+\_\+data\+\_\+bytes@{obtain\+\_\+data\+\_\+bytes}}
+\index{obtain\+\_\+data\+\_\+bytes@{obtain\+\_\+data\+\_\+bytes}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{obtain\+\_\+data\+\_\+bytes()}{obtain\_data\_bytes()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::obtain\+\_\+data\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDMXPro_1_1Processor_ad8895162387072e0c5c44101f516b351}\label{classDMXPro_1_1Processor_ad8895162387072e0c5c44101f516b351}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!obtain\+\_\+end\+\_\+byte@{obtain\+\_\+end\+\_\+byte}}
+\index{obtain\+\_\+end\+\_\+byte@{obtain\+\_\+end\+\_\+byte}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{obtain\+\_\+end\+\_\+byte()}{obtain\_end\_byte()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+bool \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::obtain\+\_\+end\+\_\+byte (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Checks that the next incoming byte is indeed the end delimiter byte. 
+
+No matter the validity of the next incoming byte as a end delimiter byte, the state machine is reset.
+
+\begin{DoxyNote}{Note}
+Alters the state of the state machine
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+The state machine has already acquired a the payload of the message 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The state machine is now waiting a start byte again
+\end{DoxyPostcond}
+
+\begin{DoxyRetVals}{Return values}
+{\em true} & A valid message has been received \\
+\hline
+{\em false} & A non-\/valid message was received \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a229f4d96176b4fbcda52fa09e44e297a}\label{classDMXPro_1_1Processor_a229f4d96176b4fbcda52fa09e44e297a}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!obtain\+\_\+length\+\_\+bytes@{obtain\+\_\+length\+\_\+bytes}}
+\index{obtain\+\_\+length\+\_\+bytes@{obtain\+\_\+length\+\_\+bytes}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{obtain\+\_\+length\+\_\+bytes()}{obtain\_length\_bytes()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::obtain\+\_\+length\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Reads in the next two length bytes, and checks that the resulting length value derived from those two bytes is valid. 
+
+\begin{DoxyNote}{Note}
+The message\+\_\+data\+\_\+length variable is also updated with this received length value.
+\end{DoxyNote}
+If the payload length is not valid, the state machine is reset. Otherwise, the state machine is advanced, such that it is now acquiring the payload of the message.
+
+\begin{DoxyNote}{Note}
+Alters the state of the state machine, and updates one variable of non-\/local scope.
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+The state machine has already acquired the label byte 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The state machine is now acquiring the payload of the message 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a792bcffc8ca31367baf568305516dac8}\label{classDMXPro_1_1Processor_a792bcffc8ca31367baf568305516dac8}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!obtain\+\_\+start\+\_\+byte@{obtain\+\_\+start\+\_\+byte}}
+\index{obtain\+\_\+start\+\_\+byte@{obtain\+\_\+start\+\_\+byte}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{obtain\+\_\+start\+\_\+byte()}{obtain\_start\_byte()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::obtain\+\_\+start\+\_\+byte (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Checks that the next incoming byte is indeed the start byte. 
+
+If the next incoming byte is not the start byte, the state machine is reset, such that it waits for a start byte again.
+
+\begin{DoxyNote}{Note}
+Alters the state of the state machine
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+The state machine has been reset 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The state machine is now waiting for the type byte (label byte in E\+N\+T\+T\+EC nomenclature) 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_ad2e73b51c77d95ff948b2b994eba3cfd}\label{classDMXPro_1_1Processor_ad2e73b51c77d95ff948b2b994eba3cfd}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!obtain\+\_\+type\+\_\+byte@{obtain\+\_\+type\+\_\+byte}}
+\index{obtain\+\_\+type\+\_\+byte@{obtain\+\_\+type\+\_\+byte}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{obtain\+\_\+type\+\_\+byte()}{obtain\_type\_byte()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::obtain\+\_\+type\+\_\+byte (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\hyperlink{classDMXPro_1_1Processor}{Processor} state machine function. Stores the next incoming value as the type byte. 
+
+\begin{DoxyNote}{Note}
+The message\+\_\+label value is updated with this type byte.
+\end{DoxyNote}
+Alters the state of the state machine, and updates one variable of non-\/local scope.
+
+\begin{DoxyPrecond}{Precondition}
+The state machine has already acquired a start byte 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The state machine is now waiting for the two length bytes 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a93e71e87740b0464504f829297bb654f}\label{classDMXPro_1_1Processor_a93e71e87740b0464504f829297bb654f}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint8\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtains the D\+MX data value for a particular D\+MX channel. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em c} & the D\+MX channel to obtain the D\+MX data value for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Bounds checking is not performed. If R\+AM storage has not been reserved for this D\+MX channel\textquotesingle{}s data, then the access may result in a dereference of an invalid pointer. 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+D\+MX data value \mbox{[}0,255\mbox{]} for that particular D\+MX channel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a3391d1ac0d213bdadbed8313d15584d6}\label{classDMXPro_1_1Processor_a3391d1ac0d213bdadbed8313d15584d6}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!process@{process}}
+\index{process@{process}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{Event} \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::process (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Processes the incoming packet stream from the Host PC and returns events based on the processed packets. 
+
+\begin{DoxyWarning}{Warning}
+This function must be called regularly in order to prevent a communications buffer overflow, which may result in lost packets. This is because this library does not handle any packet processing in the background. Any packet processing is done synchronously. Users may wish to implement asynchronous functionality themselves. 
+\end{DoxyWarning}
+
+\begin{DoxyRetVals}{Return values}
+{\em An} & event code representing what the host PC requested \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{D\+M\+X\+Pro\+::\+Event} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a21c28c13ee050cabdaabc6d869137dcc}\label{classDMXPro_1_1Processor_a21c28c13ee050cabdaabc6d869137dcc}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!process\+\_\+message@{process\+\_\+message}}
+\index{process\+\_\+message@{process\+\_\+message}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{process\+\_\+message()}{process\_message()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{namespaceDMXPro_a0b4335b3ed2abbd803e6d33c54d6ac6d}{Event} \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::process\+\_\+message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDMXPro_1_1Processor_a21c28c13ee050cabdaabc6d869137dcc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a554484560a2dcc0d5763074a584074bb}\label{classDMXPro_1_1Processor_a554484560a2dcc0d5763074a584074bb}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!send\+\_\+data@{send\+\_\+data}}
+\index{send\+\_\+data@{send\+\_\+data}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{send\+\_\+data()}{send\_data()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::send\+\_\+data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{labels}}]{label,  }\item[{uint16\+\_\+t}]{data\+\_\+size,  }\item[{uint16\+\_\+t}]{append\+\_\+zeroes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a27f23f48cc4fe881915e813a972eb43b}\label{classDMXPro_1_1Processor_a27f23f48cc4fe881915e813a972eb43b}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data@{send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data}}
+\index{send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data@{send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data()}{send\_dmx\_data\_acq\_data()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::send\+\_\+dmx\+\_\+data\+\_\+acq\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a3632542df4aae7719d6ab2e964271e36}\label{classDMXPro_1_1Processor_a3632542df4aae7719d6ab2e964271e36}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!set\+\_\+channel@{set\+\_\+channel}}
+\index{set\+\_\+channel@{set\+\_\+channel}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{set\+\_\+channel()}{set\_channel()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::set\+\_\+channel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{channel\+\_\+number,  }\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Sets a D\+MX channel to a certain value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em channel\+\_\+number} & the D\+MX channel to set, relative to zero \\
+\hline
+\mbox{\tt in}  & {\em value} & D\+MX channel data value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Bounds checking is performed. When a request is made to set the D\+MX data value of a channel whose storage is not reserved, the request is ignored, silently. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a30fe8b5251a30f8662dbb6d312c4fe25}\label{classDMXPro_1_1Processor_a30fe8b5251a30f8662dbb6d312c4fe25}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data@{store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data}}
+\index{store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data@{store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data()}{store\_widget\_parameters\_acq\_data()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::store\+\_\+widget\+\_\+parameters\+\_\+acq\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDMXPro_1_1Processor_a30fe8b5251a30f8662dbb6d312c4fe25_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_ae65b0e05885eb2878544e5bedcded36c}\label{classDMXPro_1_1Processor_ae65b0e05885eb2878544e5bedcded36c}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!upload\+\_\+dmx@{upload\+\_\+dmx}}
+\index{upload\+\_\+dmx@{upload\+\_\+dmx}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{upload\+\_\+dmx()}{upload\_dmx()}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+void \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::upload\+\_\+dmx (\begin{DoxyParamCaption}\item[{bool}]{valid,  }\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint16\+\_\+t}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends dmx data to the host PC, via the provided communication channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em valid} & Set to true to inform PC that dmx data is valid, and we have not dropped incoming D\+MX packets due to processing load. Set to false to indicate that data may be corrupted due to buffer overflow \\
+\hline
+{\em data} & Pointer to data array containing dmx data to be sent \\
+\hline
+{\em length} & Length of D\+MX data array (max 512) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classDMXPro_1_1Processor_a0dc6a66e64a393c6ca41f0d596edca3b}\label{classDMXPro_1_1Processor_a0dc6a66e64a393c6ca41f0d596edca3b}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!dmx\+\_\+data@{dmx\+\_\+data}}
+\index{dmx\+\_\+data@{dmx\+\_\+data}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{dmx\+\_\+data}{dmx\_data}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint8\+\_\+t$\ast$ \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::dmx\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+D\+MX buffer data location \mbox{\Hypertarget{classDMXPro_1_1Processor_a1286b3edd8b9eea1c27853ac48c3845f}\label{classDMXPro_1_1Processor_a1286b3edd8b9eea1c27853ac48c3845f}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!dmx\+\_\+max\+\_\+channels@{dmx\+\_\+max\+\_\+channels}}
+\index{dmx\+\_\+max\+\_\+channels@{dmx\+\_\+max\+\_\+channels}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{dmx\+\_\+max\+\_\+channels}{dmx\_max\_channels}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::dmx\+\_\+max\+\_\+channels\hspace{0.3cm}{\ttfamily [private]}}
+
+Maximum number of D\+MX channels \mbox{\Hypertarget{classDMXPro_1_1Processor_a240aa5037cd16241045aa59cf7778924}\label{classDMXPro_1_1Processor_a240aa5037cd16241045aa59cf7778924}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!message\+\_\+data\+\_\+length@{message\+\_\+data\+\_\+length}}
+\index{message\+\_\+data\+\_\+length@{message\+\_\+data\+\_\+length}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{message\+\_\+data\+\_\+length}{message\_data\_length}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::message\+\_\+data\+\_\+length\hspace{0.3cm}{\ttfamily [private]}}
+
+Length of message data being processed \mbox{\Hypertarget{classDMXPro_1_1Processor_a1ac91fd49f9650bc45ee1a1ad8e5f39f}\label{classDMXPro_1_1Processor_a1ac91fd49f9650bc45ee1a1ad8e5f39f}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!message\+\_\+data\+\_\+received@{message\+\_\+data\+\_\+received}}
+\index{message\+\_\+data\+\_\+received@{message\+\_\+data\+\_\+received}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{message\+\_\+data\+\_\+received}{message\_data\_received}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::message\+\_\+data\+\_\+received\hspace{0.3cm}{\ttfamily [private]}}
+
+Length of message data that has been received \mbox{\Hypertarget{classDMXPro_1_1Processor_a7cda5025516aa2cdf2fdab4928652678}\label{classDMXPro_1_1Processor_a7cda5025516aa2cdf2fdab4928652678}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!message\+\_\+label@{message\+\_\+label}}
+\index{message\+\_\+label@{message\+\_\+label}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{message\+\_\+label}{message\_label}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{namespaceDMXPro_a001319de95203723f1bd253fec3186cd}{labels} \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::message\+\_\+label\hspace{0.3cm}{\ttfamily [private]}}
+
+Label of message being processed \mbox{\Hypertarget{classDMXPro_1_1Processor_ab862c9d44d1abdcd029d0d47da7e928d}\label{classDMXPro_1_1Processor_ab862c9d44d1abdcd029d0d47da7e928d}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!parameters@{parameters}}
+\index{parameters@{parameters}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{parameters}{parameters}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{structDMXPro_1_1widget__parameters__non__user__defined}{widget\+\_\+parameters\+\_\+non\+\_\+user\+\_\+defined} \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::parameters\hspace{0.3cm}{\ttfamily [private]}}
+
+D\+MX widget parameters \mbox{\Hypertarget{classDMXPro_1_1Processor_afad2bc7129dfc3e1f039af5ae0243802}\label{classDMXPro_1_1Processor_afad2bc7129dfc3e1f039af5ae0243802}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!ser@{ser}}
+\index{ser@{ser}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{ser}{ser}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+ser\+\_\+typ$\ast$ \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::ser\hspace{0.3cm}{\ttfamily [private]}}
+
+Pointer to a serial object used to communicate with the PC \mbox{\Hypertarget{classDMXPro_1_1Processor_ab3573fe1aa615ec51dfd826c7f2747f9}\label{classDMXPro_1_1Processor_ab3573fe1aa615ec51dfd826c7f2747f9}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!serial\+\_\+number@{serial\+\_\+number}}
+\index{serial\+\_\+number@{serial\+\_\+number}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{serial\+\_\+number}{serial\_number}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint32\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::serial\+\_\+number\hspace{0.3cm}{\ttfamily [private]}}
+
+Widget serial number \mbox{\Hypertarget{classDMXPro_1_1Processor_a1b0ea97d2f76042a9c5c65d6fbb88df0}\label{classDMXPro_1_1Processor_a1b0ea97d2f76042a9c5c65d6fbb88df0}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!state@{state}}
+\index{state@{state}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24}{States} \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::state =\hyperlink{classDMXPro_1_1Processor_ab5c1e3e1ccd6dd60b9e05c3438341a24a334c4a4c42fdb79d7ebc3e73b517e6f8}{States\+::none}\hspace{0.3cm}{\ttfamily [private]}}
+
+\hyperlink{classDMXPro_1_1Processor}{Processor} state \mbox{\Hypertarget{classDMXPro_1_1Processor_a45fb005d1d5aa98896a8a29362f5a7e8}\label{classDMXPro_1_1Processor_a45fb005d1d5aa98896a8a29362f5a7e8}} 
+\index{D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}!widget\+\_\+user\+\_\+configuration\+\_\+size@{widget\+\_\+user\+\_\+configuration\+\_\+size}}
+\index{widget\+\_\+user\+\_\+configuration\+\_\+size@{widget\+\_\+user\+\_\+configuration\+\_\+size}!D\+M\+X\+Pro\+::\+Processor@{D\+M\+X\+Pro\+::\+Processor}}
+\subsubsection{\texorpdfstring{widget\+\_\+user\+\_\+configuration\+\_\+size}{widget\_user\_configuration\_size}}
+{\footnotesize\ttfamily template$<$typename ser\+\_\+typ $>$ \\
+uint16\+\_\+t \hyperlink{classDMXPro_1_1Processor}{D\+M\+X\+Pro\+::\+Processor}$<$ ser\+\_\+typ $>$\+::widget\+\_\+user\+\_\+configuration\+\_\+size =0\hspace{0.3cm}{\ttfamily [private]}}
+
+Widget user configuration size (Size of the user-\/defined widget configuration array in the packet) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{arduino__DMXPro_8h}{arduino\+\_\+\+D\+M\+X\+Pro.\+h}\end{DoxyCompactItemize}
