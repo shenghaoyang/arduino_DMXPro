@@ -45,12 +45,9 @@ namespace DMXPro{
    * \brief Return events from the serial packet processor
    */
   enum Event:uint8_t {
-	  none, ///< No event was generated from the packet processor\
-	   either no packets have been sent from the host PC, or we are in the \
-	    midst of processing some
+	  none, ///< No event was generated from the packet processor either no packets have been sent from the host PC, or we are in the midst of processing some
 	  parameters_requested, ///< Host PC has requested DMX output information
-	  parameters_changed, ///< Host PC has requested that we change the DMX\
-	   output timings, etc.
+	  parameters_changed, ///< Host PC has requested that we change the DMX output timings, etc.
 	  serial_requested, ///< Host PC has requested for our serial number
 	  dmx_data, ///< Host PC has updated the DMX data that we must output
   };
@@ -150,7 +147,7 @@ private:
        \post The state machine is now waiting for the two length bytes
     */
     void obtain_type_byte(){
-      message_label=ser->read();
+      message_label=static_cast<DMXPro::labels>(ser->read());
       if(message_label >= label_max){
         message_label=invalid;
       }
@@ -294,6 +291,9 @@ private:
           case send_dmx_data:
             send_dmx_data_acq_data();
             break;
+          default:
+        	/* Should not be reached at all */
+        	break;
         }
       } else {
         /* When we have acquired all the data, advance to the next
