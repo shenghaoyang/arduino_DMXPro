@@ -320,13 +320,13 @@ private:
     Event process_message(){
       switch(message_label){
         case invalid:
-          return false;
+          return Event::none;
           break;
         case reprogram_firmware:
-          return false;
+          return Event::none;
           break;
         case program_flash_page:
-          return false;
+          return Event::none;
           break;
         case get_widget_parameters:
           {
@@ -359,7 +359,7 @@ private:
             break;
           }
       }
-      return false;
+      return Event::none;
     }
 
 public:
