@@ -1,4 +1,8 @@
 # arduino_DMXPro
+
+![alt-text](https://user-images.githubusercontent.com/10371596/32492431-363a36fc-c3f5-11e7-8ea0-76ff09d26764.jpg) 
+*using jinx to drive 8 8x8 max7219 led matrices connected to an Arduino Pro Micro*
+
 arduino_DMXPro is an Arduino Library that allows an Arduino to act (partially) as an ENTTEC USB DMX Pro V1. 
 
 Receiving downstream DMX data from the PC and uploading DMX data to the PC are both supported.
